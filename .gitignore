@@ -1,0 +1,64 @@
+# macOS System Files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Environment Variables and Secrets (Strictly Excluded)
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+credentials.json
+*secret*
+
+# Node / Frontend Build Artifacts
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+.vite/
+frontend/.vite/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Java / Maven Build Artifacts
+target/
+backend/target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+hs_err_pid*
+replay_pid*
+
+# IDE Metadata
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.project
+.classpath
+.settings/
+*.sublime-workspace
+*.sublime-project
+
+# Temporary / Scratch Files
+*.tmp
+*.bak
+*.swp
+scratch/
+
+
+# TypeScript build info
+*.tsbuildinfo
