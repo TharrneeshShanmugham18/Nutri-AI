@@ -68,21 +68,48 @@ Ensure the following runtimes are installed on your machine:
 
 ---
 
-## Running & Testing Milestone M01
+## Running & Testing the Project
 
-### 1. Frontend Build Verification
+### 1. Local Database Setup (Docker Desktop)
+Ensure Docker Desktop is running. Start the PostgreSQL 16.8 container with a persistent volume:
 ```bash
-cd frontend
-npm install
-npm run build
+# Start PostgreSQL container in detached mode
+docker compose up -d
+
+# Verify container status and health
+docker compose ps
+
+# Check PostgreSQL readiness inside container
+docker compose exec postgres pg_isready -U nutri_user -d nutriai
+
+# Stop PostgreSQL container (preserves volume nutriai_pgdata)
+docker compose down
 ```
 
-### 2. Backend Compilation & Test Verification
+### 2. Environment Configuration
+Configuration is managed via environment variables with safe development defaults:
+```bash
+# Optional: create local .env file from template
+cp .env.example .env
+```
+Default connection properties:
+- `DATABASE_HOST`: `localhost`
+- `DATABASE_PORT`: `5432`
+- `DATABASE_NAME`: `nutriai`
+- `DATABASE_USERNAME`: `nutri_user`
+- `DATABASE_PASSWORD`: `change_this_in_local_env`
+
+### 3. Backend Compilation, Migrations & Tests
+Flyway runs automatically on application startup, applying migrations from `backend/src/main/resources/db/migration/`:
 ```bash
 cd backend
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-25.jdk/Contents/Home"
-./mvnw clean compile
-./mvnw test
+
+# Compile and run test suite (includes database connectivity and Flyway migration tests)
+./mvnw clean test
+
+# Run the Spring Boot application locally
+./mvnw spring-boot:run
 ```
 
 ---
